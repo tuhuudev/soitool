@@ -43,6 +43,8 @@ interface Props {
   news?: boolean;
   /** Trang hồ sơ tác giả (E-E-A-T) -> author.url trong JSON-LD */
   authorUrl?: string;
+  /** Trang mỏng / trang tiện ích -> noindex, follow (vẫn cho bot đi theo link) */
+  noindex?: boolean;
   /** Câu hỏi thường gặp -> JSON-LD FAQPage (FAQ rich result) */
   faq?: { q: string; a: string }[];
   /** Điểm review (0-5) + tên công cụ -> JSON-LD Review (review snippet sao) */
@@ -64,6 +66,7 @@ const {
   video,
   news = false,
   authorUrl,
+  noindex = false,
   faq = [],
   rating,
   ratingTool,
@@ -206,6 +209,7 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex, follow" />}
 <meta name="generator" content={Astro.generator} />
 
 <!-- Open Graph (Facebook hiển thị thẻ preview từ đây) -->
