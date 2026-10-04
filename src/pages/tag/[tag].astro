@@ -29,10 +29,13 @@ export async function getStaticPaths() {
 
 const { name, posts } = Astro.props;
 const title = `Thẻ: ${name}`;
-const description = `Tất cả bài viết gắn thẻ ${name} trên ${SITE_NAME}.`;
+const description = `${posts.length} bài review, so sánh và hướng dẫn về ${name} trên ${SITE_NAME}: giá, ưu nhược điểm và có đáng tiền không.`;
+// Thẻ ít bài = trang mỏng, gần trùng nội dung với bài gốc -> không index cho đến khi đủ bài.
+const MIN_POSTS_TO_INDEX = 3;
+const noindex = posts.length < MIN_POSTS_TO_INDEX;
 ---
 
-<BaseLayout title={title} description={description} type="website">
+<BaseLayout title={title} description={description} type="website" noindex={noindex}>
   <Breadcrumbs items={[{ label: "Trang chủ", href: "/" }, { label: `#${name}` }]} />
 
   <section class="page-intro">
