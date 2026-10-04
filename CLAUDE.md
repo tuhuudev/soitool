@@ -4,8 +4,9 @@ Vietnamese affiliate blog reviewing AI/SaaS tools. Astro 5 static site, deployed
 
 ## Commands
 - `npm ci` — install
+- `npm test` — node:test unit tests (`scripts/test/`): affiliate inserter, slugify parity with `src/utils.ts`, and a content check that every `/go/<slug>` / `ctaTool` points at a routable entry in `affiliate-map.json`
 - `npm run check` — `astro check` (types)
-- `npm run build` — OG images → `astro build` → Pagefind. `check` + `build` must pass before any PR.
+- `npm run build` — OG images → `astro build` → Pagefind. `test` + `check` + `build` must pass before any PR.
 - `npm run ai:money` / `ai:auto` — AI post pipeline (see `.claude/commands/money-pack.md`, HUONG-DAN-*.md)
 
 ## Layout
