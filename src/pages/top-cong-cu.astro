@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import affiliateMap from "../../scripts/data/affiliate-map.json";
-import { slugify } from "../utils";
+import { jsonLdString, slugify } from "../utils";
 import { SITE_NAME, SITE_URL } from "../consts";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -36,7 +36,7 @@ const rows = tools
   });
 
 // ItemList JSON-LD: giúp Google hiểu đây là trang danh sách xếp hạng công cụ.
-const itemListJson = JSON.stringify({
+const itemListJson = jsonLdString({
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: `Top công cụ AI & SaaS đáng tiền — ${SITE_NAME}`,
